@@ -17,11 +17,26 @@ limitations under the License.
 
 const app = (() => {
 
-  function getImageName(country) {
+  // function getImageName(country) {
 
-    // create and return a promise
+  //   // create and return a promise
 
-  }
+  // }
+
+function getImageName(country) {
+  country = country.toLowerCase();
+  const promiseOfImageName = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (country === 'spain' || country === 'chile' || country === 'peru') {
+        resolve(country + '.png');
+      } else {
+        reject(Error('Didn\'t receive a valid country name!'));
+      }
+    }, 1000);
+  });
+  console.log(promiseOfImageName);
+  return promiseOfImageName;    
+}
 
   function isSpain(country) {
 
@@ -29,11 +44,31 @@ const app = (() => {
 
   }
 
-  function flagChain(country) {
+  // function flagChain(country) {
 
-    // use the promise
+  //   // use the promise
 
-  }
+  // }
+
+
+//   function flagChain(country) {
+//   return getImageName(country)
+//   .then(logSuccess, logError);    
+// }
+
+// function flagChain(country) {
+//   return getImageName(country)
+//   .then(logSuccess)
+//   .catch(logError);    
+// }
+
+function flagChain(country) {
+  return getImageName(country)
+  .then(fetchFlag)
+  .then(processFlag)
+  .then(appendFlag)
+  .catch(logError); 
+}
 
   function allFlags(promiseList) {
 
